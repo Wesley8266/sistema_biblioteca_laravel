@@ -58,7 +58,16 @@
                             class="w-[300px] bg-[#4B2E2A] text-white rounded-full border-2 border-[#251715]"
                         >
                     </div>
-
+                    {{-- <a href="{{ route('register') }}">Registre-se</a> --}}
+                    @if ($errors->any())
+                    <div class="bg-red-900 text-white p-3 rounded-md mb-4 w-[300px] border-2 border-red-950">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
                     <!-- Botão -->
                     <button
                         type="submit"

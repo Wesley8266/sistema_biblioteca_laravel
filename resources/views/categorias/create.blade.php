@@ -71,7 +71,8 @@
     </aside>
 
     <!-- Conteúdo -->
-    <main class="ml-64 min-h-screen flex justify-center items-center p-8">
+    <main class="flex ml-64 min-h-screen justify-center items-center p-8">
+        
 
         <div class="w-full max-w-2xl bg-[#171111] border border-[#312322] rounded-3xl shadow-2xl p-8">
 
@@ -107,6 +108,16 @@
                                focus:outline-none
                                focus:border-[#E28300]"
                     >
+
+                @if ($errors->any())
+                    <div class="bg-red-500 text-white p-3 rounded mb-4 mt-4 w-full max-w-2xl">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 </div>
 
                 <div class="flex justify-end gap-4">

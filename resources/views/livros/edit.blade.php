@@ -27,28 +27,28 @@
                 <li>
                     <a href="{{ route('dashboard') }}"
                        class="flex items-center gap-3 p-3 rounded-lg hover:bg-[#8A4B2A] transition">
-                        📊 Dashboard
+                        <img src="{{ asset('imagens/dashboard.png') }}" class="w-6"> Dashboard
                     </a>
                 </li>
 
                 <li>
                     <a href="{{ route('categorias.index') }}"
-                       class="flex items-center gap-3 p-3 rounded-lg hover:bg-[#8A4B2A] transition ">
-                        🏷️ Categorias
+                       class="flex items-center gap-3 p-3 rounded-lg transition hover:bg-[#8A4B2A]">
+                        <img src="{{ asset('imagens/tag.png') }}" class="w-6"> Categorias
                     </a>
                 </li>
 
                 <li>
                     <a href="{{ route('alunos.index') }}"
-                       class="flex items-center gap-3 p-3 rounded-lg hover:bg-[#8A4B2A] transition">
-                        👨‍🎓 Alunos
+                       class="flex items-center gap-3 p-3 rounded-lg hover:bg-[#8A4B2A]">
+                        <img src="{{ asset('imagens/alunos.png') }}" class="w-6"> Alunos
                     </a>
                 </li>
 
                 <li>
                     <a href="{{ route('livros.index') }}"
-                       class="flex items-center gap-3 p-3 rounded-lg bg-[#D97706] shadow-lg shadow-[#D97706]  transition">
-                        📚 Livros
+                       class="flex items-center gap-3 p-3 rounded-lg transition bg-[#D97706] shadow-lg shadow-[#D97706]">
+                        <img src="{{ asset('imagens/livros.png') }}" class="w-6"> Livros
                     </a>
                 </li>
 

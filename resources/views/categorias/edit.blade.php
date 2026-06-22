@@ -108,6 +108,16 @@
                                focus:outline-none
                                focus:border-[#E28300]"
                     >
+
+                @if ($errors->any())
+                    <div class="bg-red-500 text-white p-3 rounded mb-4 mt-4 w-full max-w-2xl">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 </div>
 
                 <div class="flex justify-end gap-4">

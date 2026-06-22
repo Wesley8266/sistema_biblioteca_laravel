@@ -69,7 +69,12 @@
     </aside>
 
     <!-- Conteúdo -->
-    <main class="ml-64 p-8">
+        <main class="ml-64 p-8">
+            @if (session('success'))
+                <div class="bg-green-500 text-white p-3 rounded mb-4">
+                    {{ session('success') }}
+                </div>
+            @endif
 
         <h2 class="text-3xl font-bold text-[#EDE6DC] mb-8">
             BEM VINDO(A) ADMINISTRADOR(A)!
@@ -78,8 +83,8 @@
         <!-- Cards -->
         <div class="grid grid-cols-3 gap-6">
 
-            <div class="bg-[#211818] p-6 rounded-xl border border-[#311f16]">
-                <a href="{{ route('livros.index') }}">
+            <div class="bg-[#211818] p-6 rounded-xl border border-[#311f16] hover:scale-105">
+                <a href="{{ route('livros.index') }}" >
                     <h2 class="text-[#B9B1AC]">Livros</h2>
                     <p class="text-4xl text-[#E28300]">
                         {{ $totalLivros }}
@@ -88,7 +93,7 @@
             </div>
 
 
-            <div class="bg-[#211818] p-6 rounded-xl border border-[#311f16]">
+            <div class="bg-[#211818] p-6 rounded-xl border border-[#311f16] hover:scale-105">
                 <a href="{{ route('alunos.index') }}">
                     <h2 class="text-[#B9B1AC]">Alunos</h2>
                     <p class="text-4xl text-[#E28300]">
@@ -97,7 +102,7 @@
                 </a>
             </div>
 
-            <div class="bg-[#211818] p-6 rounded-xl border border-[#311f16]">
+            <div class="bg-[#211818] p-6 rounded-xl border border-[#311f16] hover:scale-105">
                 <a href="{{ route('categorias.index') }}">
                     <h2 class="text-[#B9B1AC]">Categorias</h2>
                     <p class="text-4xl text-[#E28300]">

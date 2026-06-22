@@ -30,17 +30,31 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $category = new Category(); 
-        $category->categoria = $request->categoria; 
+        $request->validate([
+            'categoria' => 'required|max:255',
+        ]);
+
+        if (Category::where('categoria', $request->categoria)->exists()) {
+            return redirect()->route('categorias.create')->withErrors([
+                'categoria' => 'Essa categoria já existe!',
+            ])->withInput();
+        }
+
+        $category = new Category();
+        $category->categoria = $request->categoria;
         $category->save();
 
-        return redirect()->route('categorias.index'); 
+
+            return redirect()->route('categorias.index')
+                ->with('success', 'Categoria cadastrada com sucesso!');
     }
+    
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id) 
+    
     {
         //
     }
@@ -53,13 +67,34 @@ class CategoryController extends Controller
         return view('categorias.edit', compact('category')); 
     } 
  
-    public function update(Request $request, $id) { 
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'categoria' => 'required|max:255',
+        ]);
 
-        $category = Category::find($id); 
-        $category->categoria = $request->categoria; 
-        $category->save(); 
-    
-        return redirect()->route('categorias.index'); 
+        $category = Category::find($id);
+
+        if (!$category) {
+            return back()->withErrors([
+                'categoria' => 'Categoria não encontrada.',
+            ])->withInput();
+        }
+
+        // Verifica se outra categoria com o mesmo nome existe
+        if (Category::where('categoria', $request->categoria)
+            ->where('id', '!=', $id)
+            ->exists()) {
+            return back()->withErrors([
+                'categoria' => 'Não é possivel alterar o nome da categoria, pois já existe essa uma categoria com esse nome .',
+            ])->withInput();
+        }
+
+        $category->categoria = $request->categoria;
+        $category->save();
+
+        return redirect()->route('categorias.index')
+            ->with('success', 'Categoria atualizada com sucesso!');
     }
 
     /**
@@ -68,6 +103,6 @@ class CategoryController extends Controller
     public function destroy($id) { 
         $category = Category::find($id); 
         $category->delete(); 
-        return redirect()->route('categorias.index'); 
+        return redirect()->route('categorias.index')->with('success', "Categoria " . $category["categoria"]. " excluída sucesso!"); 
     } 
 }
