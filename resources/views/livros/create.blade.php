@@ -97,7 +97,7 @@
                         id="titulo"
                         type="text"
                         name="titulo"
-                        placeholder="Nome completo do aluno"
+                        placeholder="Título do livro"
                         class="w-full bg-[#211818]
                                border border-[#312322]
                                text-[#EDE6DC]
@@ -117,7 +117,7 @@
                         type="text"
                         name="autor"
                         required
-                        placeholder="Email do aluno"
+                        placeholder="Autor do livro"
                         class="w-full bg-[#211818]
                                border border-[#312322]
                                text-[#EDE6DC]
@@ -136,6 +136,7 @@
                     <select
                         id="categoria_id"
                         name="categoria_id"
+                        placeholder="Escolher opção"
                         required
                         class="w-full bg-[#211818]
                             border border-[#312322]
@@ -143,6 +144,8 @@
                             p-3 rounded-xl mb-5
                             focus:outline-none
                             focus:border-[#E28300]">
+
+                        <option value="" selected disabled>Escolher categoria</option>
                             
                         @foreach($categorias as $categoria)
                             <option value="{{ $categoria->id }}" class="bg-white text-black">
@@ -152,6 +155,17 @@
 
                     </select>
                 </div>
+                
+                @if ($errors->any())
+                    <div class="bg-red-500 text-white p-3 rounded mb-4 mt-4 w-full max-w-2xl">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 <div class="flex justify-end gap-4">
 
                     <a href="{{ route('livros.index') }}"

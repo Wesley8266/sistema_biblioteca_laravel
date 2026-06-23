@@ -31,13 +31,21 @@ class LivrosController extends Controller
      */
     public function store(Request $request)
     {
+        
+        if (Livros::where('titulo', $request->titulo)->exists()) {
+            return redirect()->route('livros.create')->withErrors([
+                'Livro' => 'Esse livro já existe!',
+            ])->withInput();
+        }
+    
         $livro = new Livros();
         $livro->titulo = $request->titulo;
         $livro->autor = $request->autor;
         $livro->categoria_id = $request->categoria_id;
         $livro->save();
 
-        return redirect()->route('livros.index');
+        return redirect()->route('livros.index')->with('success', 'Livro cadastrado com sucesso!');
+    
     }
 
     /**
@@ -62,16 +70,35 @@ class LivrosController extends Controller
     /**
      * Update the specified resource in storage.
      */
+
     public function update(Request $request, $id)
     {
-        $livro = Livros::find($id);
+        $request->validate([
+            'titulo' => 'required',
+            'autor' => 'required',
+            'categoria_id' => 'required',
+        ]);
 
-        $livro->titulo = $request->titulo;
-        $livro->autor = $request->autor;
-        $livro->categoria_id = $request->categoria_id;
-        $livro->save();
+        $livro = Livros::findOrFail($id);
 
-        return redirect()->route('livros.index');
+        $tituloExiste = Livros::where('titulo', $request->titulo)
+            ->where('id', '!=', $id)
+            ->exists();
+
+        if ($tituloExiste) {
+            return redirect()->route('livros.edit', $id)->withErrors([
+                'titulo' => 'Já existe um livro com esse título.',
+            ])->withInput();
+        }
+
+        $livro->update([
+            'titulo' => $request->titulo,
+            'autor' => $request->autor,
+            'categoria_id' => $request->categoria_id,
+        ]);
+
+        return redirect()->route('livros.index')
+            ->with('success', 'Livro atualizado com sucesso!');
     }
 
     /**
@@ -83,6 +110,6 @@ class LivrosController extends Controller
 
         $livro->delete();
 
-        return redirect()->route('livros.index');
+        return redirect()->route('livros.index')->with('success', "O livro " . $livro["titulo"] . " foi exluído(a) com sucesso!");
     }
 }

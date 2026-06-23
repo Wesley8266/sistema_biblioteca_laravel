@@ -98,7 +98,7 @@
                         type="text"
                         name="titulo"
                         value="{{ $livro->titulo }}"
-                        placeholder="Nome completo do aluno"
+                        placeholder="Título do livro"
                         class="w-full bg-[#211818]
                                border border-[#312322]
                                text-[#EDE6DC]
@@ -119,7 +119,7 @@
                         name="autor"
                         value="{{ $livro->autor }}"
                         required
-                        placeholder="Email do aluno"
+                        placeholder="Autor do livro"
                         class="w-full bg-[#211818]
                                border border-[#312322]
                                text-[#EDE6DC]
@@ -139,6 +139,7 @@
                             id="categoria_id"
                             name="categoria_id"
                             required
+                            placeholder="Escolher opção"
                             class="w-full bg-[#211818]
                                 border border-[#312322]
                                 text-[#EDE6DC]
