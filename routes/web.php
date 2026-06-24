@@ -6,6 +6,10 @@ use App\Http\Controllers\AlunosController;
 use App\Http\Controllers\LivrosController;
 use App\Http\Controllers\DashboardController;
 
+Route::get('/', function () {
+    return redirect('/login');
+});
+
 require __DIR__.'/auth.php';
 
 Route::middleware('auth')->group(function () {
